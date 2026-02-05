@@ -13,10 +13,10 @@ android.archs = arm64-v8a, armeabi-v7a
 
 # লাইসেন্স অটো-একসেপ্ট নিশ্চিত করতে
 android.accept_sdk_license = True
-android.api = 33
+android.api = 31
 android.minapi = 21
-android.sdk = 33
-android.build_tools_version = 33.0.2
+android.sdk = 31
+android.build_tools_version = 31.0.0
 android.ndk = 25b
 
 [buildozer]
