@@ -21,9 +21,8 @@ jobs:
       - name: Build with Buildozer
         run: |
           export PATH=$PATH:$HOME/.local/bin
-          # লাইসেন্স গ্রহণ করার বিকল্প ও নিরাপদ পদ্ধতি
-          buildozer android debug || true
-          yes y | buildozer android debug
+          # পাইপ এরর এড়াতে সরাসরি কমান্ড
+          buildozer android debug
         env:
           ACCEPT_SDK_LICENSE: "yes"
 
@@ -32,4 +31,3 @@ jobs:
         with:
           name: package
           path: bin/*.apk
-          
