@@ -1,28 +1,25 @@
-name: Build C-based APK
-on: [push, pull_request]
+[app]
+title = My C Calculator
+package.name = ccalc
+package.domain = org.test
+source.dir = .
+source.include_exts = py,png,jpg,kv,atlas,c
+version = 0.1
+requirements = python3,kivy
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      
-      - name: Install Build Tools
-        run: |
-          sudo apt update
-          sudo apt install -y git zip unzip openjdk-17-jdk python3-pip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo5 cmake libffi-dev libssl-dev
-          pip install --upgrade buildozer cython virtualenv setuptools
+orientation = portrait
+osx.python_version = 3
+osx.kivy_version = 1.9.1
+fullscreen = 0
 
-      - name: Build APK
-        run: |
-          export PATH=$PATH:$HOME/.local/bin
-          # লাইসেন্স অটো-একসেপ্ট করে বিল্ড শুরু করা
-          yes | buildozer android debug
-        env:
-          ACCEPT_SDK_LICENSE: "yes"
+android.archs = arm64-v8a, armeabi-v7a
+android.allow_backup = True
+android.api = 31
+android.minapi = 21
+android.sdk = 31
+android.build_tools_version = 31.0.0
+android.accept_sdk_license = True
 
-      - name: Upload APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: package
-          path: bin/*.apk
+[buildozer]
+log_level = 2
+warn_on_root = 1
