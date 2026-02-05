@@ -21,8 +21,9 @@ jobs:
       - name: Build with Buildozer
         run: |
           export PATH=$PATH:$HOME/.local/bin
-          # লাইসেন্স অটো-একসেপ্ট করে বিল্ড শুরু করা
-          yes | buildozer android debug
+          # লাইসেন্স গ্রহণ করার বিকল্প ও নিরাপদ পদ্ধতি
+          buildozer android debug || true
+          yes y | buildozer android debug
         env:
           ACCEPT_SDK_LICENSE: "yes"
 
