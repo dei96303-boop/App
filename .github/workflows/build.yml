@@ -22,7 +22,8 @@ jobs:
         run: |
           export PATH=$PATH:$HOME/.local/bin
           # পাইপ এরর এড়াতে সরাসরি কমান্ড
-          buildozer android debug
+          
+          buildozer -v android debug
         env:
           ACCEPT_SDK_LICENSE: "yes"
 
