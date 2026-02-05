@@ -1,0 +1,28 @@
+name: Build C-based APK
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Install Build Tools
+        run: |
+          sudo apt update
+          sudo apt install -y git zip unzip openjdk-17-jdk python3-pip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo5 cmake libffi-dev libssl-dev
+          pip install --upgrade buildozer cython virtualenv setuptools
+
+      - name: Build APK
+        run: |
+          export PATH=$PATH:$HOME/.local/bin
+          # লাইসেন্স অটো-একসেপ্ট করে বিল্ড শুরু করা
+          yes | buildozer android debug
+        env:
+          ACCEPT_SDK_LICENSE: "yes"
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: package
+          path: bin/*.apk
